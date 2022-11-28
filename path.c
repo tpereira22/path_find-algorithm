@@ -7,7 +7,7 @@ int main()
     int i;
     int j;
     int exit_counter;
-    char    mapstr[20][20];
+    char    mapstr[50][50];
 
     mapstr[0][0] = '1';
     mapstr[0][1] = '1';
@@ -55,39 +55,55 @@ int main()
     exit_counter = 0;
     while (exit_counter != 1)
     {
-        if (mapstr[y][x] == 'E')
-            exit_counter = 1;
-        else if (mapstr[y][x + 1] != 1)
+        if (mapstr[y][x + 1] != 1)
         {
-            mapstr[y][x] = '0';
-            mapstr[y][x + 1] = 'P';
-            x += 1;
+            if (mapstr[y][x + 1] == '0')
+            {
+                mapstr[y][x] = '0';
+                mapstr[y][x + 1] = 'P';
+                x += 1;
+            }
+            else if (mapstr[y][x] == 'E')
+                exit_counter = 1;
         }
         else if (mapstr[y + 1][x] != 1)
         {
-            mapstr[y][x] = '0';
-            mapstr[y + 1][x] = 'P';
-            y += 1;
+            if (mapstr[y + 1][x] == '0')
+            {
+                mapstr[y][x] = '0';
+                mapstr[y + 1][x] = 'P';
+                y += 1;
+            }
+            else if (mapstr[y][x] == 'E')
+                exit_counter = 1;
         }
         else if (mapstr[y][x - 1] != 1)
         {
-            
-            mapstr[y][x] = '0';
-            mapstr[y][x - 1] = 'P';
-            x -= 1;
+            if (mapstr[y][x - 1] == '0')
+            {
+                mapstr[y][x] = '0';
+                mapstr[y][x - 1] = 'P';
+                x -= 1;
+            }
+            else if (mapstr[y][x] == 'E')
+                exit_counter = 1;
         }
         else if (mapstr[y - 1][x] != 1)
         {
-            
-            mapstr[y][x] = '0';
-            mapstr[y - 1][x] = 'P';
-            y -= 1;
+            if (mapstr[y - 1][x] == '0')
+            {
+                mapstr[y][x] = '0';
+                mapstr[y - 1][x] = 'P';
+                y -= 1;
+            }
+            else if (mapstr[y][x] == 'E')
+                exit_counter = 1;
         }
     i = 0;
-    while (i < 5)
+    while (mapstr[i])
     {
         j = 0;
-        while (j < 6)
+        while (mapstr[i][j])
         {
             printf("%c", mapstr[i][j]);
             j++;
